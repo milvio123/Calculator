@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="Main.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="Design.css">
+</head>
+<body>
+    <div class="container mt-3">
+
+        
+        <div id = "vertgroupone "class="btn-group-vertical">
+          <button value="9" id ="9" type="button" class="btn btn-primary mr-0">9</button>
+          <button value="5" id ="5" type="button" class="btn btn-primary mr-0">5</button>
+          <button value="1" id ="1" type="button" class="btn btn-primary mr-0">1</button>
+          <button id = "addbutton"  type="button" class="btn btn-primary mr-0">+</button>
+      
+        </div>
+        <div id = "vertgrouptwo" class="btn-group-vertical">
+          <button value="8" id ="8" type="button" class="btn btn-primary mr-0">8</button>
+          <button value="4" id ="4" type="button" class="btn btn-primary mr-0">4</button>
+          <button value="0" id ="0" type="button" class="btn btn-primary mr-0">0</button>
+          <button id = "subutton" type="button" class="btn btn-primary mr-0">-</button>
+      
+        </div>
+        <div id = "vertgroupthree" class="btn-group-vertical">
+          <button value="7" id ="7" type="button" class="btn btn-primary mr-0">7</button>
+          <button value="3" id ="3" type="button" class="btn btn-primary mr-0 ">3</button>
+          <button  id = "clear" type="button" class="btn btn-primary mr-0">Clear</button>
+          <button id = "multbutton" type="button" class="btn btn-primary mr-0">*</button>
+      
+        </div>
+        <div id = "vertgroupfour" class="btn-group-vertical">
+            <button value="6" id ="6" type="button" class="btn btn-primary">6</button>
+            <button value="2" id ="2" type="button" class="btn btn-primary">2</button>
+            <button id = "equalbutton"  type="button" class="btn btn-primary">=</button>
+            <button id = "divbutton" type="button" class="btn btn-primary">/</button>
+        
+          </div>
+          <div id = "vertgroupfive" class="btn-group-vertical">
+            <button id ="decimal" type="button" class="btn btn-primary">.</button>
+            <button  type="button" class="btn btn-primary">+/-</button>
+            <button type="button" class="btn btn-primary">%</button>
+            <button type="button" class="btn btn-primary"></button>
+        
+          </div>    
+          <div id ="outputdiv">
+
+          </div>
+      </div>
+
+
+
+
+
+<script>
+
+var valsarr = []
+var isclicked = false;
+var numbclicks = 0;
+// var numbval;
+function click() {
+    if(isclicked==false) {
+        valsarr.push(this.value)
+  }
+}  
+
+
+var buttonval;
+var totalvals = []
+var totalsums = []
+var addval ;
+var addclicks = 0;
+
+
+function addclickcounter() {
+  isclicked = true
+  addval = valsarr.join('')
+    while(valsarr.length > 0) {
+      valsarr.pop();
+  }
+  addclicks+=1
+  buttonval = addval
+  totalvals.push(buttonval)
+  isclicked = false
+}
+
+var multclicks = 0;
+function multclickcounter() {
+isclicked = true
+addval = valsarr.join('')
+while(valsarr.length > 0) {
+    valsarr.pop();
+}
+multclicks+=1
+buttonval = addval
+totalvals.push(addval)
+isclicked = false
+
+}
+
+var divclicks = 0;
+function divclickcounter() {
+isclicked = true
+addval = valsarr.join('')
+while(valsarr.length > 0) {
+    valsarr.pop();
+}
+divclicks+=1
+buttonval = addval
+totalvals.push(addval)
+isclicked = false
+
+}
+
+var subclicks = 0;
+function subclickcounter() {
+isclicked = true
+addval = valsarr.join('')
+while(valsarr.length > 0) {
+    valsarr.pop();
+}
+subclicks+=1
+buttonval = addval
+totalvals.push(addval)
+isclicked = false
+
+}
+
+var sum;
+var multsum;
+var divsum;
+var subsum;
+var equalval;
+var firstNumb;
+var secondNumb;
+
+function finalres() {
+isclicked = false;
+equalval = valsarr.join('')
+while(valsarr.length > 0) {
+    valsarr.pop();
+}
+buttonval = equalval
+totalvals.push(equalval)
+if(addclicks==1) {
+
+if(typeof sum=='undefined' && typeof multsum == 'undefined' && typeof divsum == 'undefined' && typeof subsum == 'undefined') {
+firstNumb = parseFloat(totalvals[0])
+secondNumb = parseFloat(totalvals[1])
+sum = secondNumb + firstNumb;
+totalsums.push(sum)
+alert(sum)
+}
+else {
+sum = parseFloat(totalvals[totalvals.length-1]);
+sum+=parseFloat(totalsums[totalsums.length-1])
+totalsums.push(sum)  
+alert(sum)
+}
+addclicks=0;
+}
+
+
+if(multclicks==1) {
+
+if(typeof multsum == 'undefined'&& typeof sum == 'undefined' && typeof divsum == 'undefined' && typeof subsum == 'undefined') {
+firstNumb = parseFloat(totalvals[0])
+secondNumb = parseFloat(totalvals[1])
+multsum = secondNumb * firstNumb;
+totalsums.push(multsum)  
+alert(multsum)
+}
+else {
+multsum = parseFloat(totalvals[totalvals.length-1]);
+multsum*=parseFloat(totalsums[totalsums.length-1])
+totalsums.push(multsum)  
+alert(multsum)
+
+}
+multclicks=0;
+}
+
+
+if(divclicks==1) {
+
+if(typeof divsum == 'undefined' && typeof sum == 'undefined' && typeof multsum == 'undefined' && typeof subsum == 'undefined') {
+firstNumb = parseFloat(totalvals[0])
+secondNumb = parseFloat(totalvals[1])
+divsum = firstNumb/secondNumb;
+totalsums.push(divsum)  
+alert(divsum)  
+}
+
+else {
+divsum = parseFloat(totalsums[totalsums.length-1]);
+divsum/=parseFloat(totalvals[totalvals.length-1])
+totalsums.push(divsum) 
+alert(divsum)  
+
+}
+divclicks=0;
+}
+
+if(subclicks==1) {
+
+if(typeof divsum == 'undefined' && typeof sum == 'undefined' && typeof multsum == 'undefined' && typeof subsum == 'undefined') {
+firstNumb = parseFloat(totalvals[0])
+secondNumb = parseFloat(totalvals[1])
+subsum = secondNumb-firstNumb;
+totalsums.push(subsum)  
+alert(subsum)  
+
+}
+
+else {
+subsum = parseFloat(totalsums[totalsums.length-1]);
+subsum-=parseFloat(totalvals[totalvals.length-1])
+totalsums.push(subsum)  
+alert(subsum)  
+}
+subclicks=0;
+}
+}
+
+function clearfunc() {
+
+ valsarr = []
+ totalvals = []
+ totalsums = []
+ isclicked = false;
+ numbclicks = 0;
+//  numbval = undefined;
+ buttonval  = undefined;
+ addval  = undefined;
+ sum  = undefined;
+ multsum  = undefined;
+ divsum  = undefined;
+ subsum  = undefined;
+ equalval = undefined ;
+ firstNumb  = undefined;
+ secondNumb  = undefined;
+ multclicks = 0;
+ divclicks = 0;
+ subclicks = 0;
+ addclicks = 0;
+
+}
+
+
+document.getElementById("addbutton").addEventListener("click", addclickcounter);
+document.getElementById("multbutton").addEventListener("click", multclickcounter);
+document.getElementById("divbutton").addEventListener("click", divclickcounter);
+document.getElementById("subutton").addEventListener("click", subclickcounter);
+document.getElementById("equalbutton").addEventListener("click", finalres);
+document.getElementById("clear").addEventListener("click", clearfunc);
+document.getElementById("0").addEventListener("click", click);
+document.getElementById("1").addEventListener("click", click);
+document.getElementById("2").addEventListener("click", click);
+document.getElementById("3").addEventListener("click", click);
+document.getElementById("4").addEventListener("click", click);
+document.getElementById("5").addEventListener("click", click);
+document.getElementById("6").addEventListener("click", click);
+document.getElementById("7").addEventListener("click", click);
+document.getElementById("8").addEventListener("click", click);
+document.getElementById("9").addEventListener("click", click);
+
+
+
+
+
+</script> 
+
+    
+</body>
+</html>
